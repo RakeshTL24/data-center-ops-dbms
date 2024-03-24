@@ -1,0 +1,36 @@
+t1.to check if the updating cost of a maintenance_id is greater than 1000
+DELIMITER //
+
+CREATE TRIGGER CheckMaintenanceCost
+BEFORE UPDATE ON maintenance_activity
+FOR EACH ROW
+BEGIN
+   IF NEW.cost > 1000 THEN
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Cannot update cost to a value greater than 1000.';
+   END IF;
+END; //
+
+DELIMITER ;
+
+UPDATE maintenance_activity SET cost = 1200 WHERE activity_id = 'r1_f';
+
+t2.trigger that prevents deletion of records from the maintenance_activity 
+table if the cost of the maintenance activity is greater than 700.
+
+DELIMITER //
+
+CREATE TRIGGER Prevent_HighCost_Deletion
+BEFORE DELETE ON maintenance_activity
+FOR EACH ROW
+BEGIN
+    IF OLD.cost > 700 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Cannot delete maintenance activity with cost greater than 1000.';
+    END IF;
+END;
+//
+
+DELIMITER ;
+
+DELETE FROM maintenance_activity WHERE activity_id = 'r1_f';

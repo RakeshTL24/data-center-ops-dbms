@@ -1,0 +1,136 @@
+SERVER
+INSERT INTO server (server_id, Smodel, processor_type, ram_size, storage_capacity,datacenter_id)
+VALUES ('server001', 'Dell PowerEdge R940', 'Intel Xeon Platinum 8280', '512GB', '10TB','dc1');
+
+INSERT INTO server (server_id, Smodel, processor_type, ram_size, storage_capacity,datacenter_id)
+VALUES ('server002', 'HP ProLiant DL385 Gen10', 'AMD EPYC 7742', '256GB', '8TB','dc2');
+
+INSERT INTO server (server_id, Smodel, processor_type, ram_size, storage_capacity,datacenter_id)
+VALUES ('server003', 'IBM Power System S922', 'POWER9 10-core', '1TB', '15TB','dc3');
+
+INSERT INTO server (server_id, Smodel, processor_type, ram_size, storage_capacity,datacenter_id)
+VALUES ('server004', 'Supermicro SuperServer', 'Intel Xeon Gold 6154', '1TB', '20TB','dc4');
+
+INSERT INTO server (server_id, Smodel, processor_type, ram_size, storage_capacity,datacenter_id)
+VALUES ('server005', 'Lenovo ThinkSystem SR650', 'Intel Xeon Silver 4214', '512GB', '15TB','dc5');
+
+INSERT INTO server (server_id, Smodel, processor_type, ram_size, storage_capacity,datacenter_id)
+VALUES ('server006', 'ASUS RS700-E9-RS12', 'Intel Xeon Bronze 32', '256GB', '10TB','dc6');
+
+INSERT INTO server (server_id, Smodel, processor_type, ram_size, storage_capacity,datacenter_id)
+VALUES ('server010', 'Dell PowerEdge R940', 'Intel Xeon Platinum 8280', '512GB', '10TB','dc10');
+
+INSERT INTO server (server_id, Smodel, processor_type, ram_size, storage_capacity,datacenter_id)
+VALUES ('server011', 'HP ProLiant DL385 Gen10', 'AMD EPYC 7742', '256GB', '8TB','dc11');
+
+
+
+NETWORK_EQUIPMENT
+INSERT INTO network_equipment (Equipment_name, model, port_count, type)
+VALUES ('Router001', 'Cisco Catalyst 9300', 48, 'Router');
+
+INSERT INTO network_equipment (Equipment_name, model, port_count, type)
+VALUES ('Switch001', 'Dell PowerSwitch N3208PX', 8, 'Switch');
+
+INSERT INTO network_equipment (Equipment_name, model, port_count, type)
+VALUES ('Firewall001', 'Fortinet FortiGate 60E', 10, 'Firewall');
+
+INSERT INTO network_equipment (Equipment_name, model, port_count, type)
+VALUES ('Router002', 'Juniper Networks MX240', 4, 'Router');
+
+INSERT INTO network_equipment (Equipment_name, model, port_count, type)
+VALUES ('Switch002', 'Arista Networks 7050X3', 32, 'Switch');
+
+INSERT INTO network_equipment (Equipment_name, model, port_count, type)
+VALUES ('Firewall002', 'Palo Alto Networks PA', 8, 'Firewall');
+
+INSERT INTO network_equipment (Equipment_name, model, port_count, type)
+VALUES ('Router004', 'Cisco Catalyst 9300', 48, 'Router');
+
+INSERT INTO network_equipment (Equipment_name, model, port_count, type)
+VALUES ('Switch004', 'Dell PowerSwitch N3208PX', 8, 'Switch');
+
+
+
+
+MAINTENANCE_ACTIVITY
+INSERT INTO MAINTENANCE_ACTIVITY (activity_id, technician_name, date, cost,datacenter_id)
+VALUES ('s1_m', 'John Doe', '2024-02-15', '500','dc1');
+
+INSERT INTO MAINTENANCE_ACTIVITY (activity_id, technician_name, date, cost,datacenter_id)
+VALUES ('r1_f', 'Jane Smith', '2024-02-16', '750','dc2');
+
+INSERT INTO MAINTENANCE_ACTIVITY (activity_id, technician_name, date, cost,datacenter_id)
+VALUES ('s2_c', 'Robert Johnson', '2024-02-17', '600','dc3');
+
+INSERT INTO MAINTENANCE_ACTIVITY (activity_id, technician_name, date, cost,datacenter_id)
+VALUES ('s4_m', 'Alice Brown', '2024-02-18', '550','dc4');
+
+INSERT INTO MAINTENANCE_ACTIVITY (activity_id, technician_name, date, cost,datacenter_id)
+VALUES ('r2_f', 'David Wilson', '2024-02-19', '800','dc5');
+
+INSERT INTO MAINTENANCE_ACTIVITY (activity_id, technician_name, date, cost,datacenter_id)
+VALUES ('s3_c', 'Emma Davis', '2024-02-20', '650','dc6');
+
+INSERT INTO MAINTENANCE_ACTIVITY (activity_id, technician_name, date, cost,datacenter_id)
+VALUES ('s10_m', 'John Doe', '2024-02-24', '500','dc10');
+
+INSERT INTO MAINTENANCE_ACTIVITY (activity_id, technician_name, date, cost,datacenter_id)
+VALUES ('r4_f', 'Jane Smith', '2024-02-25', '750','dc11');
+
+
+
+
+
+DATA_CENTER
+INSERT INTO DATA_CENTER (datacenter_id, name, power_usage, location)
+VALUES ('dc1', 'Data Center 1', 50000, 'Bengaluru');
+
+INSERT INTO DATA_CENTER (datacenter_id, name, power_usage, location)
+VALUES ('dc2', 'Data Center 2', 60000, 'Mumbai');
+
+INSERT INTO DATA_CENTER (datacenter_id, name, power_usage, location)
+VALUES ('dc3', 'Data Center 3', 70000, 'Chennai');
+
+INSERT INTO DATA_CENTER (datacenter_id, name, power_usage, location)
+VALUES ('dc4', 'Data Center 4', 80000, 'Hyderabad');
+
+INSERT INTO DATA_CENTER (datacenter_id, name, power_usage, location)
+VALUES ('dc5', 'Data Center 5', 90000, 'Pune');
+
+INSERT INTO DATA_CENTER (datacenter_id, name, power_usage, location)
+VALUES ('dc6', 'Data Center 6', 100000, 'Kolkata');
+
+INSERT INTO DATA_CENTER (datacenter_id, name, power_usage, location)
+VALUES ('dc10', 'Data Center 1', 50000, 'Bengaluru');
+
+INSERT INTO DATA_CENTER (datacenter_id, name, power_usage, location)
+VALUES ('dc11', 'Data Center 2', 60000, 'Mumbai');
+
+
+
+
+CONNECTION
+INSERT INTO CONNECTION (server_id, Equipment_name)
+VALUES ('server001', 'Router001');
+
+INSERT INTO CONNECTION (server_id, Equipment_name)
+VALUES ('server002', 'Switch001');
+
+INSERT INTO CONNECTION (server_id, Equipment_name)
+VALUES ('server003', 'Firewall001');
+
+INSERT INTO CONNECTION (server_id, Equipment_name)
+VALUES ('server004', 'Router002');
+
+INSERT INTO CONNECTION (server_id, Equipment_name)
+VALUES ('server005', 'Switch002');
+
+INSERT INTO CONNECTION (server_id, Equipment_name)
+VALUES ('server006', 'Firewall002');
+
+INSERT INTO CONNECTION (server_id, Equipment_name)
+VALUES ('server010', 'Router004');
+
+INSERT INTO CONNECTION (server_id, Equipment_name)
+VALUES ('server011', 'Switch004');

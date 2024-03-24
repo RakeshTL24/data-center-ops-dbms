@@ -1,0 +1,46 @@
+p1. procedure that calculates the total cost of maintenance for each data center.
+
+DELIMITER //
+
+CREATE PROCEDURE CalculateMaintenanceCostPerDataCenter()
+BEGIN
+    SELECT dc.datacenter_id, dc.name, COALESCE(SUM(ma.cost), 0) AS total_maintenance_cost
+    FROM data_center dc
+    LEFT JOIN maintenance_activity ma ON dc.datacenter_id = ma.datacenter_id
+    LEFT JOIN server s ON ma.datacenter_id = s.datacenter_id
+    GROUP BY dc.datacenter_id, dc.name;
+END //
+
+CALL CalculateMaintenanceCostPerDataCenter();
+
+p2.Procedure to Calculate Average RAM Size by Processor Type in Data Centers with High Power Usage:
+DELIMITER //
+
+CREATE PROCEDURE CalculateAverageRAMByProcessorTypeInHighPowerDataCenters(IN threshold_power INT)
+BEGIN
+    SELECT s.processor_type, AVG(s.ram_size) AS avg_ram_size
+    FROM server s
+    JOIN data_center dc ON s.datacenter_id = dc.datacenter_id
+    WHERE dc.power_usage > threshold_power
+    GROUP BY s.processor_type;
+END //
+
+CALL CalculateAverageRAMByProcessorTypeInHighPowerDataCenters(60000); -- Example: Threshold set to 60000 Watts
+
+
+p3.Procedure to Find Data Centers with the Highest Power Usage:
+
+DELIMITER //
+
+CREATE PROCEDURE FindDataCentersWithHighestPowerUsage()
+BEGIN
+    SELECT datacenter_id, name AS datacenter_name, power_usage
+    FROM data_center
+    WHERE power_usage = (
+        SELECT MAX(power_usage)
+        FROM data_center
+    );
+END //
+
+CALL FindDataCentersWithHighestPowerUsage();
+

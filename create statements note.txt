@@ -1,0 +1,22 @@
+create table DATA_CENTER
+(datacenter_id varchar(25),name varchar(25),power_usage int,location varchar(25),
+primary key(datacenter_id));
+
+create table SERVER
+(server_id varchar(25),Smodel varchar(25), processor_type varchar(25),ram_size varchar(25),
+storage_capacity varchar(25),datacenter_id varchar(25),primary key(server_id),
+foreign key(datacenter_id) references DATA_CENTER(datacenter_id));
+
+create table NETWORK_EQUIPMENT
+(Equipment_name varchar(25),model varchar(25),port_count int,type varchar(25),primary key(Equipment_name));
+
+create table MAINTENANCE_ACTIVITY
+(activity_id varchar(25),technician_name varchar(25),date date,cost varchar(25),datacenter_id varchar(25),
+primary key(activity_id),
+foreign key(datacenter_id) references DATA_CENTER(datacenter_id));
+
+create table CONNECTION
+(server_id varchar(25) ,Equipment_name varchar(25),
+foreign key(server_id) references SERVER(server_id),
+foreign key(equipment_name) references NETWORK_EQUIPMENT(equipment_name),
+primary key(server_id,equipment_name));

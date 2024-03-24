@@ -1,0 +1,40 @@
+1.Query to get all servers along with their associated data center details:
+SELECT s.server_id, s.Smodel, s.processor_type, s.ram_size, s.storage_capacity, d.name AS datacenter_name, d.location
+FROM server s
+INNER JOIN data_center d ON s.datacenter_id = d.datacenter_id;
+
+
+2.Query to calculate the total cost of all maintenance activities:
+SELECT SUM(cost) AS total_maintenance_cost
+FROM maintenance_activity;
+
+3.Query to get all servers and their associated maintenance activities:
+SELECT s.server_id, s.Smodel, m.activity_id, m.technician_name, m.date, m.cost
+FROM server s
+LEFT JOIN maintenance_activity m ON s.datacenter_id = m.datacenter_id;
+
+4.Query to calculate the percentage of ports utilized for each type of network equipment:
+SELECT ne.Equipment_name, ne.type,
+       COUNT(c.server_id) / ne.port_count * 100 AS utilization_percentage
+FROM network_equipment ne
+LEFT JOIN connection c ON ne.Equipment_name = c.Equipment_name
+GROUP BY ne.Equipment_name, ne.type, ne.port_count;
+
+5.Query to find the data center(s) with the highest and lowest power usage:
+SELECT name AS datacenter_name, power_usage
+FROM data_center
+WHERE power_usage = (SELECT MAX(power_usage) FROM data_center)
+   OR power_usage = (SELECT MIN(power_usage) FROM data_center);
+
+
+
+6.Query to find servers with the most recent maintenance activity:
+SELECT server_id, Smodel, last_maintenance_date
+FROM (
+    SELECT s.server_id, s.Smodel, MAX(m.date) AS last_maintenance_date
+    FROM server s
+    LEFT JOIN maintenance_activity m ON s.datacenter_id = m.datacenter_id
+    GROUP BY s.server_id, s.Smodel
+) AS recent_maintenance
+ORDER BY last_maintenance_date DESC
+LIMIT 1;
